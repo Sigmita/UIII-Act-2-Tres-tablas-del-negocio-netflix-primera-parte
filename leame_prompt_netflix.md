@@ -1,117 +1,105 @@
-Perfecto ✅ Veo que necesitas **todos los scripts y pasos completos** para crear el **proyecto “Netflix” en Django**, incluyendo la estructura, modelos, vistas, plantillas, URLs, y configuraciones.
-
-A continuación te dejo **la guía paso a paso con los comandos y el código completo**, lista para copiar y ejecutar.
+Perfecto 👌 aquí tienes **TODO el proyecto completo junto**, listo para copiar, pegar y ejecutar en tu máquina o subir a **GitHub**.
+Incluye los pasos, estructura de carpetas, código fuente de todos los archivos y las configuraciones necesarias.
 
 ---
 
-## 🧩 **PROYECTO: Netflix**
+# 🎬 **Proyecto Django – Netflix (Primera Parte)**
 
 **Lenguaje:** Python
 **Framework:** Django
-**Editor:** Visual Studio Code
+**Editor:** VS Code
 
 ---
 
-### **1️⃣ Crear carpeta del proyecto**
+## 🧱 **PASOS PARA CREAR EL PROYECTO**
 
 ```bash
+# 1️⃣ Crear carpeta del proyecto
 mkdir UIII_Netflix_0624
-```
-
----
-
-### **2️⃣ Abrir la carpeta en VS Code**
-
-```bash
 cd UIII_Netflix_0624
+
+# 2️⃣ Abrir en VS Code
 code .
-```
 
----
+# 3️⃣ Abrir terminal en VS Code
+# (Menú superior → Terminal → New Terminal)
 
-### **3️⃣ Abrir terminal en VS Code**
-
-En VS Code:
-
-* Menú superior → **Terminal → New Terminal**
-
----
-
-### **4️⃣ Crear entorno virtual**
-
-```bash
+# 4️⃣ Crear entorno virtual
 python -m venv .venv
-```
 
----
-
-### **5️⃣ Activar entorno virtual**
-
-* En Windows:
-
-```bash
+# 5️⃣ Activar entorno virtual
+# Windows:
 .venv\Scripts\activate
-```
-
-* En Linux/Mac:
-
-```bash
+# Linux/Mac:
 source .venv/bin/activate
-```
 
----
+# 6️⃣ Seleccionar intérprete en VS Code
+# (Ctrl + Shift + P → "Python: Select Interpreter" → elegir .venv)
 
-### **6️⃣ Activar intérprete de Python**
-
-En VS Code → **Ctrl + Shift + P → Python: Select Interpreter → elegir .venv**
-
----
-
-### **7️⃣ Instalar Django**
-
-```bash
+# 7️⃣ Instalar Django
 pip install django
-```
 
----
-
-### **8️⃣ Crear proyecto (sin duplicar carpeta)**
-
-```bash
+# 8️⃣ Crear proyecto SIN duplicar carpeta
 django-admin startproject backend_Netflix .
-```
 
-> El punto final evita crear una carpeta adicional.
-
----
-
-### **9️⃣ Ejecutar servidor en el puerto 8024**
-
-```bash
+# 9️⃣ Ejecutar servidor en puerto 8024
 python manage.py runserver 8024
-```
 
----
+# 10️⃣ Abrir en el navegador
+# http://127.0.0.1:8024/
 
-### **🔟 Copiar y pegar el link**
-
-En el navegador abre:
-
-```
-http://127.0.0.1:8024/
-```
-
----
-
-### **1️⃣1️⃣ Crear aplicación `app_Netflix`**
-
-```bash
+# 11️⃣ Crear aplicación
 python manage.py startapp app_Netflix
 ```
 
 ---
 
-### **1️⃣2️⃣ Crear modelos en `app_Netflix/models.py`**
+## 📁 **ESTRUCTURA FINAL DEL PROYECTO**
+
+```
+UIII_Netflix_0624/
+│
+├── .venv/
+│
+├── backend_Netflix/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+│
+├── app_Netflix/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── migrations/
+│   │   └── __init__.py
+│   └── templates/
+│       ├── base.html
+│       ├── navbar.html
+│       ├── footer.html
+│       ├── inicio.html
+│       └── usuario/
+│           ├── agregar_usuario.html
+│           ├── ver_usuarios.html
+│           ├── actualizar_usuario.html
+│           └── borrar_usuario.html
+│
+├── db.sqlite3
+├── manage.py
+├── .gitignore
+└── README.md
+```
+
+---
+
+## ⚙️ **ARCHIVOS PRINCIPALES**
+
+### `app_Netflix/models.py`
 
 ```python
 from django.db import models
@@ -171,20 +159,7 @@ class ListaFavoritos(models.Model):
 
 ---
 
-### **12.5️⃣ Migraciones**
-
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
----
-
-### **1️⃣3️⃣ Trabajar solo con el modelo USUARIO por ahora**
-
----
-
-### **1️⃣4️⃣ Crear funciones en `app_Netflix/views.py`**
+### `app_Netflix/views.py`
 
 ```python
 from django.shortcuts import render, redirect, get_object_or_404
@@ -195,12 +170,13 @@ def inicio_netflix(request):
 
 def agregar_usuario(request):
     if request.method == "POST":
-        nombre = request.POST["nombre"]
-        apellido = request.POST["apellido"]
-        email = request.POST["email"]
-        tipo_membresia = request.POST["tipo_membresia"]
-        pais = request.POST["pais"]
-        Usuario.objects.create(nombre=nombre, apellido=apellido, email=email, tipo_membresia=tipo_membresia, pais=pais)
+        Usuario.objects.create(
+            nombre=request.POST["nombre"],
+            apellido=request.POST["apellido"],
+            email=request.POST["email"],
+            tipo_membresia=request.POST["tipo_membresia"],
+            pais=request.POST["pais"]
+        )
         return redirect("ver_usuarios")
     return render(request, "usuario/agregar_usuario.html")
 
@@ -232,58 +208,98 @@ def borrar_usuario(request, id):
 
 ---
 
-### **1️⃣5️⃣ Crear carpeta `templates` dentro de `app_Netflix`**
+### `app_Netflix/urls.py`
 
-```bash
-mkdir app_Netflix/templates
-mkdir app_Netflix/templates/usuario
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.inicio_netflix, name='inicio_netflix'),
+    path('agregar/', views.agregar_usuario, name='agregar_usuario'),
+    path('usuarios/', views.ver_usuarios, name='ver_usuarios'),
+    path('actualizar/<int:id>/', views.actualizar_usuario, name='actualizar_usuario'),
+    path('realizar_actualizacion/<int:id>/', views.realizar_actualizacion_usuario, name='realizar_actualizacion_usuario'),
+    path('borrar/<int:id>/', views.borrar_usuario, name='borrar_usuario'),
+]
 ```
 
 ---
 
-### **1️⃣6️⃣ Archivos HTML**
+### `backend_Netflix/settings.py`
 
-Crea dentro de `templates` los archivos:
+Agrega tu app en la lista de `INSTALLED_APPS`:
 
-* `base.html`
-* `header.html`
-* `navbar.html`
-* `footer.html`
-* `inicio.html`
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'app_Netflix',
+]
+```
 
 ---
 
-### **1️⃣7️⃣ `base.html` (Bootstrap incluido)**
+### `backend_Netflix/urls.py`
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('app_Netflix.urls')),
+]
+```
+
+---
+
+### `app_Netflix/admin.py`
+
+```python
+from django.contrib import admin
+from .models import Usuario, Pelicula, ListaFavoritos
+
+admin.site.register(Usuario)
+admin.site.register(Pelicula)
+admin.site.register(ListaFavoritos)
+```
+
+---
+
+## 🎨 **PLANTILLAS HTML**
+
+### `templates/base.html`
 
 ```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Netflix Admin{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <title>{% block title %}Netflix{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-    {% include 'navbar.html' %}
-    <div class="container mt-4">
-        {% block content %}{% endblock %}
-    </div>
-    {% include 'footer.html' %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  {% include 'navbar.html' %}
+  <div class="container mt-4">{% block content %}{% endblock %}</div>
+  {% include 'footer.html' %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 ```
 
 ---
 
-### **1️⃣8️⃣ `navbar.html`**
-
-Incluye menús con íconos:
+### `templates/navbar.html`
 
 ```html
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><i class="bi bi-film"></i> Sistema de Administración Netflix</a>
+    <a class="navbar-brand" href="#">🎬 Sistema de Administración Netflix</a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
         <li><a class="nav-link" href="/">Inicio</a></li>
@@ -302,17 +318,17 @@ Incluye menús con íconos:
 
 ---
 
-### **1️⃣9️⃣ `footer.html`**
+### `templates/footer.html`
 
 ```html
-<footer class="bg-dark text-white text-center fixed-bottom py-2">
-    © <script>document.write(new Date().getFullYear())</script> Creado por Ing. Eliseo Nava, CBTIS 128
+<footer class="bg-dark text-white text-center py-2 fixed-bottom">
+  © <script>document.write(new Date().getFullYear())</script> Creado por Ing. Eliseo Nava, CBTIS 128
 </footer>
 ```
 
 ---
 
-### **2️⃣0️⃣ `inicio.html`**
+### `templates/inicio.html`
 
 ```html
 {% extends 'base.html' %}
@@ -326,89 +342,106 @@ Incluye menús con íconos:
 
 ---
 
-### **2️⃣2️⃣ Archivos en `templates/usuario`**
+### `templates/usuario/agregar_usuario.html`
 
-Crea:
-
-* `agregar_usuario.html`
-* `ver_usuarios.html`
-* `actualizar_usuario.html`
-* `borrar_usuario.html`
-
-(Puedo darte el contenido completo de cada uno si lo deseas 🔹).
-
----
-
-### **2️⃣4️⃣ `urls.py` de `app_Netflix`**
-
-```python
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('', views.inicio_netflix, name='inicio_netflix'),
-    path('agregar/', views.agregar_usuario, name='agregar_usuario'),
-    path('usuarios/', views.ver_usuarios, name='ver_usuarios'),
-    path('actualizar/<int:id>/', views.actualizar_usuario, name='actualizar_usuario'),
-    path('realizar_actualizacion/<int:id>/', views.realizar_actualizacion_usuario, name='realizar_actualizacion_usuario'),
-    path('borrar/<int:id>/', views.borrar_usuario, name='borrar_usuario'),
-]
+```html
+{% extends 'base.html' %}
+{% block content %}
+<h2>Agregar Usuario</h2>
+<form method="POST">
+  {% csrf_token %}
+  <input type="text" name="nombre" class="form-control mb-2" placeholder="Nombre">
+  <input type="text" name="apellido" class="form-control mb-2" placeholder="Apellido">
+  <input type="email" name="email" class="form-control mb-2" placeholder="Correo electrónico">
+  <input type="text" name="tipo_membresia" class="form-control mb-2" placeholder="Tipo de membresía">
+  <input type="text" name="pais" class="form-control mb-2" placeholder="País">
+  <button class="btn btn-primary">Guardar</button>
+</form>
+{% endblock %}
 ```
 
 ---
 
-### **2️⃣5️⃣ Agregar `app_Netflix` en `settings.py`**
+### `templates/usuario/ver_usuarios.html`
 
-```python
-INSTALLED_APPS = [
-    ...,
-    'app_Netflix',
-]
+```html
+{% extends 'base.html' %}
+{% block content %}
+<h2>Lista de Usuarios</h2>
+<table class="table table-striped">
+  <thead>
+    <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Acciones</th></tr>
+  </thead>
+  <tbody>
+    {% for u in usuarios %}
+    <tr>
+      <td>{{ u.id_usuario }}</td>
+      <td>{{ u.nombre }} {{ u.apellido }}</td>
+      <td>{{ u.email }}</td>
+      <td>
+        <a href="{% url 'actualizar_usuario' u.id_usuario %}" class="btn btn-warning btn-sm">Editar</a>
+        <a href="{% url 'borrar_usuario' u.id_usuario %}" class="btn btn-danger btn-sm">Borrar</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
 ```
 
 ---
 
-### **2️⃣6️⃣ Configurar `backend_Netflix/urls.py`**
+### `templates/usuario/actualizar_usuario.html`
 
-```python
-from django.contrib import admin
-from django.urls import path, include
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('app_Netflix.urls')),
-]
+```html
+{% extends 'base.html' %}
+{% block content %}
+<h2>Actualizar Usuario</h2>
+<form method="POST" action="{% url 'realizar_actualizacion_usuario' usuario.id_usuario %}">
+  {% csrf_token %}
+  <input type="text" name="nombre" class="form-control mb-2" value="{{ usuario.nombre }}">
+  <input type="text" name="apellido" class="form-control mb-2" value="{{ usuario.apellido }}">
+  <input type="text" name="tipo_membresia" class="form-control mb-2" value="{{ usuario.tipo_membresia }}">
+  <input type="text" name="pais" class="form-control mb-2" value="{{ usuario.pais }}">
+  <button class="btn btn-success">Actualizar</button>
+</form>
+{% endblock %}
 ```
 
 ---
 
-### **2️⃣7️⃣ Registrar modelos en `admin.py`**
+### `templates/usuario/borrar_usuario.html`
 
-```python
-from django.contrib import admin
-from .models import Usuario, Pelicula, ListaFavoritos
-
-admin.site.register(Usuario)
-admin.site.register(Pelicula)
-admin.site.register(ListaFavoritos)
+```html
+{% extends 'base.html' %}
+{% block content %}
+<h2>¿Eliminar usuario {{ usuario.nombre }} {{ usuario.apellido }}?</h2>
+<form method="POST">
+  {% csrf_token %}
+  <button class="btn btn-danger">Eliminar</button>
+  <a href="{% url 'ver_usuarios' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
 ```
 
-Luego:
+---
+
+## ⚙️ **Migraciones y ejecución final**
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
-```
-
----
-
-### **3️⃣1️⃣ Ejecutar el servidor**
-
-```bash
 python manage.py runserver 8024
 ```
 
+📍 Abre en tu navegador:
+
+```
+http://127.0.0.1:8024/
+```
+
 ---
 
-¿Quieres que te deje también los **HTML completos del CRUD de usuarios** (`agregar_usuario.html`, `ver_usuarios.html`, etc.) con los botones y estilos Bootstrap?
-Puedo generarlos listos para copiar y pegar.
+¿Deseas que te genere este mismo contenido en un **ZIP con toda la estructura y archivos listos para abrir en VS Code**?
+Puedo prepararlo para que solo lo descargues y ejecutes directamente.
+
