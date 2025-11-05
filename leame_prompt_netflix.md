@@ -1,234 +1,207 @@
-Perfecto 👌 aquí tienes **TODO el proyecto completo junto**, listo para copiar, pegar y ejecutar en tu máquina o subir a **GitHub**.
-Incluye los pasos, estructura de carpetas, código fuente de todos los archivos y las configuraciones necesarias.
+Perfecto 👍 — aquí tienes **solo el procedimiento completo paso a paso en Visual Studio Code (VS Code)**, desde la creación del entorno virtual hasta la ejecución final del proyecto Django en el puerto **8024**, siguiendo el proyecto **UIII_Netflix_0624 (Netflix)**.
 
 ---
 
-# 🎬 **Proyecto Django – Netflix (Primera Parte)**
+# 🧩 Procedimiento completo en Visual Studio Code (VS Code)
 
-**Lenguaje:** Python
-**Framework:** Django
-**Editor:** VS Code
+### 🎯 Objetivo
+
+Crear un proyecto Django llamado **UIII_Netflix_0624**, con entorno virtual, configuración del proyecto **backend_Netflix**, aplicación **app_Netflix**, y ejecución del servidor local.
 
 ---
 
-## 🧱 **PASOS PARA CREAR EL PROYECTO**
+## 🪟 1. Crear carpeta del proyecto
+
+1. Crea una carpeta con el nombre:
+
+   ```
+   UIII_Netflix_0624
+   ```
+2. Guarda esta carpeta en un lugar fácil de ubicar, por ejemplo en `Documentos` o en el Escritorio.
+
+---
+
+## 🧭 2. Abrir la carpeta en VS Code
+
+1. Abre **Visual Studio Code**.
+2. En el menú superior, selecciona:
+
+   ```
+   Archivo → Abrir carpeta...
+   ```
+3. Busca y selecciona la carpeta **UIII_Netflix_0624**.
+4. Da clic en **Seleccionar carpeta**.
+   (Ahora estarás trabajando dentro de esa carpeta).
+
+---
+
+## 💻 3. Abrir la terminal en VS Code
+
+1. En el menú superior, selecciona:
+
+   ```
+   Ver → Terminal
+   ```
+2. Se abrirá la terminal integrada en la parte inferior del editor.
+   (Asegúrate de que diga algo como `PS ...\\UIII_Netflix_0624>` o similar).
+
+---
+
+## 🌐 4. Crear entorno virtual `.venv`
+
+En la terminal, ejecuta el siguiente comando:
 
 ```bash
-# 1️⃣ Crear carpeta del proyecto
-mkdir UIII_Netflix_0624
-cd UIII_Netflix_0624
-
-# 2️⃣ Abrir en VS Code
-code .
-
-# 3️⃣ Abrir terminal en VS Code
-# (Menú superior → Terminal → New Terminal)
-
-# 4️⃣ Crear entorno virtual
 python -m venv .venv
+```
 
-# 5️⃣ Activar entorno virtual
-# Windows:
-.venv\Scripts\activate
-# Linux/Mac:
-source .venv/bin/activate
+✅ Esto creará una carpeta llamada **.venv** dentro del proyecto.
+Contiene el entorno aislado de Python.
 
-# 6️⃣ Seleccionar intérprete en VS Code
-# (Ctrl + Shift + P → "Python: Select Interpreter" → elegir .venv)
+---
 
-# 7️⃣ Instalar Django
-pip install django
+## ⚡ 5. Activar el entorno virtual
 
-# 8️⃣ Crear proyecto SIN duplicar carpeta
-django-admin startproject backend_Netflix .
+Dependiendo del sistema operativo:
 
-# 9️⃣ Ejecutar servidor en puerto 8024
-python manage.py runserver 8024
+* **Windows (PowerShell):**
 
-# 10️⃣ Abrir en el navegador
-# http://127.0.0.1:8024/
+  ```powershell
+  .\.venv\Scripts\Activate.ps1
+  ```
 
-# 11️⃣ Crear aplicación
-python manage.py startapp app_Netflix
+* **Windows (CMD clásico):**
+
+  ```cmd
+  .\.venv\Scripts\activate
+  ```
+
+* **macOS / Linux:**
+
+  ```bash
+  source .venv/bin/activate
+  ```
+
+🔹 Si el entorno se activa correctamente, verás algo como:
+
+```
+(.venv) PS C:\Users\...\UIII_Netflix_0624>
 ```
 
 ---
 
-## 📁 **ESTRUCTURA FINAL DEL PROYECTO**
+## 🐍 6. Seleccionar el intérprete de Python en VS Code
+
+1. Presiona `Ctrl + Shift + P` para abrir la **Paleta de Comandos**.
+2. Escribe:
+
+   ```
+   Python: Select Interpreter
+   ```
+3. Selecciona el intérprete que muestre la ruta de tu entorno virtual, por ejemplo:
+
+   ```
+   .venv\Scripts\python.exe
+   ```
+
+---
+
+## 🧱 7. Instalar Django
+
+Con el entorno activado, ejecuta:
+
+```bash
+pip install django
+```
+
+Verifica que se instaló correctamente con:
+
+```bash
+django-admin --version
+```
+
+---
+
+## 🚀 8. Crear el proyecto Django
+
+Asegúrate de seguir en la carpeta **UIII_Netflix_0624**, y ejecuta:
+
+```bash
+django-admin startproject backend_Netflix .
+```
+
+> 🔸 Nota: El punto (`.`) al final evita crear una carpeta extra y deja los archivos dentro de `UIII_Netflix_0624`.
+
+Deberás ver una estructura así:
 
 ```
 UIII_Netflix_0624/
+│─ backend_Netflix/
+│  ├─ __init__.py
+│  ├─ settings.py
+│  ├─ urls.py
+│  └─ wsgi.py
 │
-├── .venv/
-│
-├── backend_Netflix/
-│   ├── __init__.py
-│   ├── asgi.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-│
-├── app_Netflix/
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py
-│   ├── tests.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── migrations/
-│   │   └── __init__.py
-│   └── templates/
-│       ├── base.html
-│       ├── navbar.html
-│       ├── footer.html
-│       ├── inicio.html
-│       └── usuario/
-│           ├── agregar_usuario.html
-│           ├── ver_usuarios.html
-│           ├── actualizar_usuario.html
-│           └── borrar_usuario.html
-│
-├── db.sqlite3
-├── manage.py
-├── .gitignore
-└── README.md
+│─ manage.py
+│─ .venv/
 ```
 
 ---
 
-## ⚙️ **ARCHIVOS PRINCIPALES**
+## ⚙️ 9. Ejecutar el servidor en el puerto 8024
 
-### `app_Netflix/models.py`
+En la terminal, escribe:
 
-```python
-from django.db import models
+```bash
+python manage.py runserver 8024
+```
 
-# ==============================
-# MODELO: USUARIO
-# ==============================
-class Usuario(models.Model):
-    id_usuario = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=255)
-    apellido = models.CharField(max_length=255)
-    email = models.CharField(max_length=255, unique=True)
-    fecha_registro = models.DateField(auto_now_add=True)
-    tipo_membresia = models.CharField(max_length=100)
-    ultimo_acceso = models.DateTimeField(auto_now=True)
-    pais = models.CharField(max_length=100)
+Luego abre tu navegador y entra al enlace que aparece, por ejemplo:
 
-    def __str__(self):
-        return f"{self.nombre} {self.apellido} ({self.email})"
+```
+http://127.0.0.1:8024/
+```
 
+✅ Si ves la página de bienvenida de Django (“The install worked successfully!”), todo está correcto.
 
-# ==============================
-# MODELO: PELICULA
-# ==============================
-class Pelicula(models.Model):
-    id_pelicula = models.AutoField(primary_key=True)
-    titulo = models.CharField(max_length=255)
-    ano_lanzamiento = models.IntegerField()
-    genero = models.CharField(max_length=100)
-    clasificacion_edad = models.CharField(max_length=50)
-    duracion_minutos = models.IntegerField()
-    director = models.CharField(max_length=255)
-    idioma_original = models.CharField(max_length=50)
+---
 
-    def __str__(self):
-        return f"{self.titulo} ({self.ano_lanzamiento})"
+## 🎬 10. Crear la aplicación `app_Netflix`
 
+Detén el servidor con `Ctrl + C` y ejecuta:
 
-# ==============================
-# MODELO: LISTA_FAVORITOS
-# ==============================
-class ListaFavoritos(models.Model):
-    categoria_lista = models.IntegerField()
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='listas_favoritos')
-    pelicula = models.ForeignKey(Pelicula, on_delete=models.CASCADE, related_name='en_listas_favoritos')
-    fecha_adicion = models.DateField(auto_now_add=True)
-    orden_en_lista = models.IntegerField()
-    visto_en_lista = models.BooleanField(default=False)
-    notas_personales = models.TextField(blank=True, null=True)
+```bash
+python manage.py startapp app_Netflix
+```
 
-    class Meta:
-        unique_together = ('usuario', 'pelicula')
+Ahora verás esta estructura:
 
-    def __str__(self):
-        return f"Lista de {self.usuario.nombre} - {self.pelicula.titulo}"
+```
+UIII_Netflix_0624/
+│─ app_Netflix/
+│  ├─ migrations/
+│  ├─ admin.py
+│  ├─ apps.py
+│  ├─ models.py
+│  ├─ views.py
+│  ├─ tests.py
+│  └─ __init__.py
+│
+│─ backend_Netflix/
+│─ manage.py
 ```
 
 ---
 
-### `app_Netflix/views.py`
+## 🧩 11. Registrar la app en `settings.py`
 
-```python
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Usuario
+Abre el archivo:
 
-def inicio_netflix(request):
-    return render(request, "inicio.html")
-
-def agregar_usuario(request):
-    if request.method == "POST":
-        Usuario.objects.create(
-            nombre=request.POST["nombre"],
-            apellido=request.POST["apellido"],
-            email=request.POST["email"],
-            tipo_membresia=request.POST["tipo_membresia"],
-            pais=request.POST["pais"]
-        )
-        return redirect("ver_usuarios")
-    return render(request, "usuario/agregar_usuario.html")
-
-def ver_usuarios(request):
-    usuarios = Usuario.objects.all()
-    return render(request, "usuario/ver_usuarios.html", {"usuarios": usuarios})
-
-def actualizar_usuario(request, id):
-    usuario = get_object_or_404(Usuario, id_usuario=id)
-    return render(request, "usuario/actualizar_usuario.html", {"usuario": usuario})
-
-def realizar_actualizacion_usuario(request, id):
-    usuario = get_object_or_404(Usuario, id_usuario=id)
-    if request.method == "POST":
-        usuario.nombre = request.POST["nombre"]
-        usuario.apellido = request.POST["apellido"]
-        usuario.tipo_membresia = request.POST["tipo_membresia"]
-        usuario.pais = request.POST["pais"]
-        usuario.save()
-        return redirect("ver_usuarios")
-
-def borrar_usuario(request, id):
-    usuario = get_object_or_404(Usuario, id_usuario=id)
-    if request.method == "POST":
-        usuario.delete()
-        return redirect("ver_usuarios")
-    return render(request, "usuario/borrar_usuario.html", {"usuario": usuario})
+```
+backend_Netflix/settings.py
 ```
 
----
-
-### `app_Netflix/urls.py`
-
-```python
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('', views.inicio_netflix, name='inicio_netflix'),
-    path('agregar/', views.agregar_usuario, name='agregar_usuario'),
-    path('usuarios/', views.ver_usuarios, name='ver_usuarios'),
-    path('actualizar/<int:id>/', views.actualizar_usuario, name='actualizar_usuario'),
-    path('realizar_actualizacion/<int:id>/', views.realizar_actualizacion_usuario, name='realizar_actualizacion_usuario'),
-    path('borrar/<int:id>/', views.borrar_usuario, name='borrar_usuario'),
-]
-```
-
----
-
-### `backend_Netflix/settings.py`
-
-Agrega tu app en la lista de `INSTALLED_APPS`:
+Busca la sección `INSTALLED_APPS` y agrega `'app_Netflix',` al final de la lista:
 
 ```python
 INSTALLED_APPS = [
@@ -242,9 +215,83 @@ INSTALLED_APPS = [
 ]
 ```
 
+Guarda los cambios.
+
 ---
 
-### `backend_Netflix/urls.py`
+## 🧾 12. Crear el modelo de datos (Usuario)
+
+Abre `app_Netflix/models.py` y reemplaza su contenido con:
+
+```python
+from django.db import models
+
+class Usuario(models.Model):
+    id_usuario = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=255)
+    apellido = models.CharField(max_length=255)
+    email = models.CharField(max_length=255, unique=True)
+    fecha_registro = models.DateField(auto_now_add=True)
+    tipo_membresia = models.CharField(max_length=100)
+    ultimo_acceso = models.DateTimeField(auto_now=True)
+    pais = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido} ({self.email})"
+```
+
+Guarda el archivo.
+
+---
+
+## ⚙️ 13. Crear y aplicar migraciones
+
+Ejecuta los comandos:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+Esto creará la base de datos `db.sqlite3`.
+
+---
+
+## 🧑‍💻 14. Registrar el modelo en `admin.py`
+
+Abre `app_Netflix/admin.py` y agrega:
+
+```python
+from django.contrib import admin
+from .models import Usuario
+
+admin.site.register(Usuario)
+```
+
+---
+
+## 🔐 15. Crear un superusuario (para entrar al panel admin)
+
+Ejecuta:
+
+```bash
+python manage.py createsuperuser
+```
+
+Llena los datos (usuario, email y contraseña).
+Ejemplo:
+
+```
+Username: admin
+Email: admin@netflix.com
+Password: 1234
+```
+
+---
+
+## 🧭 16. Configurar `urls.py` del proyecto
+
+Abre `backend_Netflix/urls.py` y edita para incluir las rutas de tu aplicación:
 
 ```python
 from django.contrib import admin
@@ -258,190 +305,106 @@ urlpatterns = [
 
 ---
 
-### `app_Netflix/admin.py`
+## 🌐 17. Crear `urls.py` dentro de `app_Netflix`
+
+Crea un nuevo archivo dentro de `app_Netflix` llamado `urls.py` con este contenido:
 
 ```python
-from django.contrib import admin
-from .models import Usuario, Pelicula, ListaFavoritos
+from django.urls import path
+from . import views
 
-admin.site.register(Usuario)
-admin.site.register(Pelicula)
-admin.site.register(ListaFavoritos)
+urlpatterns = [
+    path('', views.inicio_netflix, name='inicio'),
+]
 ```
 
 ---
 
-## 🎨 **PLANTILLAS HTML**
+## 🧠 18. Crear vista simple de inicio
 
-### `templates/base.html`
+Abre `app_Netflix/views.py` y coloca:
+
+```python
+from django.shortcuts import render
+
+def inicio_netflix(request):
+    return render(request, 'inicio.html')
+```
+
+---
+
+## 🪶 19. Crear carpeta de plantillas (templates)
+
+Dentro de `app_Netflix`, crea una carpeta llamada `templates`.
+
+Adentro crea un archivo llamado `inicio.html` con este contenido:
 
 ```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>{% block title %}Netflix{% endblock %}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Netflix - Inicio</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
-<body class="bg-light">
-  {% include 'navbar.html' %}
-  <div class="container mt-4">{% block content %}{% endblock %}</div>
-  {% include 'footer.html' %}
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<body class="bg-dark text-white text-center">
+    <h1 class="mt-5">Bienvenido al sistema Netflix</h1>
+    <p class="lead">Proyecto en Django — CBTis 128</p>
 </body>
 </html>
 ```
 
 ---
 
-### `templates/navbar.html`
+## 🏃‍♂️ 20. Ejecutar el servidor nuevamente
 
-```html
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">🎬 Sistema de Administración Netflix</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li><a class="nav-link" href="/">Inicio</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Usuarios</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'agregar_usuario' %}">Agregar Usuario</a></li>
-            <li><a class="dropdown-item" href="{% url 'ver_usuarios' %}">Ver Usuarios</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-```
-
----
-
-### `templates/footer.html`
-
-```html
-<footer class="bg-dark text-white text-center py-2 fixed-bottom">
-  © <script>document.write(new Date().getFullYear())</script> Creado por Ing. Eliseo Nava, CBTIS 128
-</footer>
-```
-
----
-
-### `templates/inicio.html`
-
-```html
-{% extends 'base.html' %}
-{% block content %}
-<div class="text-center">
-  <h1>Bienvenido al Sistema Netflix</h1>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" width="300">
-</div>
-{% endblock %}
-```
-
----
-
-### `templates/usuario/agregar_usuario.html`
-
-```html
-{% extends 'base.html' %}
-{% block content %}
-<h2>Agregar Usuario</h2>
-<form method="POST">
-  {% csrf_token %}
-  <input type="text" name="nombre" class="form-control mb-2" placeholder="Nombre">
-  <input type="text" name="apellido" class="form-control mb-2" placeholder="Apellido">
-  <input type="email" name="email" class="form-control mb-2" placeholder="Correo electrónico">
-  <input type="text" name="tipo_membresia" class="form-control mb-2" placeholder="Tipo de membresía">
-  <input type="text" name="pais" class="form-control mb-2" placeholder="País">
-  <button class="btn btn-primary">Guardar</button>
-</form>
-{% endblock %}
-```
-
----
-
-### `templates/usuario/ver_usuarios.html`
-
-```html
-{% extends 'base.html' %}
-{% block content %}
-<h2>Lista de Usuarios</h2>
-<table class="table table-striped">
-  <thead>
-    <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Acciones</th></tr>
-  </thead>
-  <tbody>
-    {% for u in usuarios %}
-    <tr>
-      <td>{{ u.id_usuario }}</td>
-      <td>{{ u.nombre }} {{ u.apellido }}</td>
-      <td>{{ u.email }}</td>
-      <td>
-        <a href="{% url 'actualizar_usuario' u.id_usuario %}" class="btn btn-warning btn-sm">Editar</a>
-        <a href="{% url 'borrar_usuario' u.id_usuario %}" class="btn btn-danger btn-sm">Borrar</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% endblock %}
-```
-
----
-
-### `templates/usuario/actualizar_usuario.html`
-
-```html
-{% extends 'base.html' %}
-{% block content %}
-<h2>Actualizar Usuario</h2>
-<form method="POST" action="{% url 'realizar_actualizacion_usuario' usuario.id_usuario %}">
-  {% csrf_token %}
-  <input type="text" name="nombre" class="form-control mb-2" value="{{ usuario.nombre }}">
-  <input type="text" name="apellido" class="form-control mb-2" value="{{ usuario.apellido }}">
-  <input type="text" name="tipo_membresia" class="form-control mb-2" value="{{ usuario.tipo_membresia }}">
-  <input type="text" name="pais" class="form-control mb-2" value="{{ usuario.pais }}">
-  <button class="btn btn-success">Actualizar</button>
-</form>
-{% endblock %}
-```
-
----
-
-### `templates/usuario/borrar_usuario.html`
-
-```html
-{% extends 'base.html' %}
-{% block content %}
-<h2>¿Eliminar usuario {{ usuario.nombre }} {{ usuario.apellido }}?</h2>
-<form method="POST">
-  {% csrf_token %}
-  <button class="btn btn-danger">Eliminar</button>
-  <a href="{% url 'ver_usuarios' %}" class="btn btn-secondary">Cancelar</a>
-</form>
-{% endblock %}
-```
-
----
-
-## ⚙️ **Migraciones y ejecución final**
+En la terminal:
 
 ```bash
-python manage.py makemigrations
-python manage.py migrate
 python manage.py runserver 8024
 ```
 
-📍 Abre en tu navegador:
+Abre el navegador en:
 
 ```
 http://127.0.0.1:8024/
 ```
 
+✅ Si ves tu página de inicio personalizada, ¡el proyecto funciona correctamente!
+
 ---
 
-¿Deseas que te genere este mismo contenido en un **ZIP con toda la estructura y archivos listos para abrir en VS Code**?
-Puedo prepararlo para que solo lo descargues y ejecutes directamente.
+## 🧩 21. Acceder al panel de administración
+
+Entra a:
+
+```
+http://127.0.0.1:8024/admin/
+```
+
+Inicia sesión con tu superusuario creado anteriormente.
+Allí podrás agregar, editar o eliminar usuarios del modelo `Usuario`.
+
+---
+
+## 🏁 22. Fin del procedimiento
+
+Tu proyecto **UIII_Netflix_0624** está totalmente funcional.
+Resumen de comandos usados:
+
+```bash
+python -m venv .venv
+.\\.venv\\Scripts\\Activate.ps1
+pip install django
+django-admin startproject backend_Netflix .
+python manage.py startapp app_Netflix
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver 8024
+```
+
+---
+
+¿Quieres que ahora te lo deje en formato **Word o PDF** para entregar (con formato limpio, listas numeradas y comandos resaltados)? Puedo generarlo automáticamente para que solo tengas que subirlo.
 
